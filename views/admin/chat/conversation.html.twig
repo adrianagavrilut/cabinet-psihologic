@@ -1,0 +1,7 @@
+{% for message in messages %}
+    {% if message.type == 'outgoing' %}
+        {% include 'admin/chat/outgoing-message.html.twig' with { 'name': message.user.nume, 'content': message.continut, 'file' : message.fisier } %}
+    {% else %}
+        {% include 'admin/chat/incoming-message.html.twig' with { 'name': message.user.nume, 'content': message.continut, 'file' : message.fisier } %}
+    {% endif %}
+{% endfor %}

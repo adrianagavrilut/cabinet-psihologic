@@ -1,0 +1,116 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="h1 mb-4 text-gray-800">Modifică testimonial</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/admin/review/edit.php?id={{ review.id }}" method="POST" enctype="multipart/form-data">
+                
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="nume">Titlu</label>
+                        <input type="text" id="titlu" placeholder="Scrieți titlul testimonialului" class="form-control  {% if errors['titlu'] is defined %}is-invalid{% endif %}" name="titlu" value="{{ review is defined ? review.titlu : '' }}" />
+                        {% if errors['titlu'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['titlu'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <select name="rating" class="form-control {% if errors['rating'] is defined %}is-invalid{% endif %}" id="rating">
+                                <option>Alege o valoare</option>
+                                <option {{ review is defined and review.rating == '1' ? 'selected'  : '' }} value="1">1</option>
+                                <option {{ review is defined and review.rating == '2' ? 'selected'  : '' }} value="2">2</option>
+                                <option {{ review is defined and review.rating == '3' ? 'selected'  : '' }} value="3">3</option>
+                                <option {{ review is defined and review.rating == '4' ? 'selected'  : '' }} value="4">4</option>
+                                <option {{ review is defined and review.rating == '5' ? 'selected'  : '' }} value="5">5</option>
+                            </select>
+                            {% if errors['rating'] is defined %}
+                                <div class="invalid-feedback">
+                                    {{ errors['rating'] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <label class="form-label" for="nume">Nume</label>
+                                <input type="text" id="nume" placeholder="Scrieți numele celui care lasă testimonialul" class="form-control  {% if errors['nume'] is defined %}is-invalid{% endif %}" name="nume" value="{{ review is defined ? review.nume : '' }}" />
+                                {% if errors['nume'] is defined %}
+                                    <div class="invalid-feedback">
+                                        {{ errors['nume'] }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                 <label class="form-label" for="despre">Despre</label>
+                                <input type="text" id="despre" placeholder="Scrieți despre cel care lasă testimonialul" class="form-control  {% if errors['despre'] is defined %}is-invalid{% endif %}" name="despre" value="{{ review is defined ? review.despre : '' }}" />
+                                {% if errors['despre'] is defined %}
+                                    <div class="invalid-feedback">
+                                        {{ errors['despre'] }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <div>
+                                    <label class="form-label" for="imagine">Imagine</label>
+                                </div>
+                                <div>
+                                    <input type="file" id="imagine" class="{% if errors['imagine'] is defined %}is-invalid{% endif %}" name="imagine" accept="image/*" />
+                                    {% if errors['imagine'] is defined %}
+                                        <div class="invalid-feedback">
+                                            {{ errors['imagine'] }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if review is defined and review.imagine %}
+                                    <div class="admin-img-thumb" style="background-image: url('/assets/img/testimoniale/{{ review.imagine }}');"></div>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="continut">Conținut</label>
+                            <textarea name="continut" class="form-control editor">{{ review is defined ? review.continut : '' }}</textarea>                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-start">
+                        <a href="/admin/review" class="btn btn-secondary px-5 rounded-pill"><h4 class="m-0">Anulare</h4></a>
+                    </div>
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5 rounded-pill"><h4 class="m-0">Salvare</h4></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="/assets/js/initEditor.js"></script>
+{% endblock %}

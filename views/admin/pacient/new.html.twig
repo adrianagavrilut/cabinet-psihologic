@@ -1,0 +1,109 @@
+{% extends "admin/base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="h1 mb-4 text-gray-800">Pacient nou</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/admin/pacient/new.php" method="POST">
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="nume">Nume</label>
+                        <input type="text" id="nume" placeholder="Scrieți numele pacientului" class="form-control  {% if errors['nume'] is defined %}is-invalid{% endif %}" name="nume" value="{{ pacient is defined ? pacient.nume : '' }}" />
+                        {% if errors['nume'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['nume'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control {% if errors['email'] is defined %}is-invalid{% endif %}" id="email" placeholder="Scrieți adresa de email" name="email" value="{{ pacient is defined ? pacient.email : '' }}">
+                        {% if errors['email'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['email'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="telefon">Telefon</label>
+                        <input type="text" id="telefon" placeholder="Scrieți numărul de telefon al pacientului" class="form-control  {% if errors['telefon'] is defined %}is-invalid{% endif %}" name="telefon" value="{{ pacient is defined ? pacient.telefon : '' }}" />
+                        {% if errors['telefon'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['telefon'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="adresa">Adresă</label>
+                        <input type="text" id="adresa" placeholder="Scrieți adresa pacientului" class="form-control  {% if errors['adresa'] is defined %}is-invalid{% endif %}" name="adresa" value="{{ pacient is defined ? pacient.adresa : '' }}" />
+                        {% if errors['adresa'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['adresa'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="gen">Gen</label>
+                            <select name="gen" class="form-control {% if errors['gen'] is defined %}is-invalid{% endif %}" id="gen">
+                                <option>Alege o valoare</option>
+                                <option {{ pacient is defined and pacient.gen == 'feminin' ? 'selected'  : '' }} value="feminin">Feminin</option>
+                                <option {{ pacient is defined and pacient.gen == 'masculin' ? 'selected'  : '' }} value="masculin">Masculin</option>
+                            </select>
+                            {% if errors['gen'] is defined %}
+                                <div class="invalid-feedback">
+                                    {{ errors['gen'] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="data_nasterii">Data nașterii</label>
+                        <input type="text" id="data" placeholder="Scrieți data nașterii a pacientului" class="form-control  {% if errors['data_nasterii'] is defined %}is-invalid{% endif %}" name="data_nasterii" value="{{ pacient is defined ? pacient.data_nasterii : '' }}" />
+                        {% if errors['data_nasterii'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['data_nasterii'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="teste">Testele pacientului</label>
+                            <select name="teste[]" multiple class="form-control" id="teste">
+                                {% for test in teste %}
+                                    <option {{ pacient is defined and test.id in pacient.teste ? 'selected'  : '' }} value="{{ test.id }}">{{ test.denumire }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-start">
+                        <a href="/admin/pacient/" class="btn btn-secondary px-5 rounded-pill"><h4 class="m-0">Anulare</h4></a>
+                    </div>
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5 rounded-pill"><h4 class="m-0">Salvare</h4></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/assets/js/initDatepicker.js"></script>
+{% endblock %}

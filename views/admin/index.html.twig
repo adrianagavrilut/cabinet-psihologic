@@ -1,0 +1,190 @@
+{% extends "admin/base.html.twig" %}
+
+{% block content %}
+
+    <h1 class="h1 text-gray-800 mb-3 p-2">Administrare</h1>
+
+    <div class="row d-flex justify-content-around align-items-center my-5">
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow mb-4">
+                {% if userRole == 'ROL_ADMIN' %}
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Statistici</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Actiuni:</div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin/medic/new.php">Adăugare psiholog</a>
+                                <a class="dropdown-item" href="/admin/blog/new.php">Adăugare articol</a>
+                                <a class="dropdown-item" href="/admin/review/new.php">Adăugare testimonial</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="myPieChart" data-numar-medici="{{ numarMedici }}" data-numar-pacienti="{{ numarPacienti }}" data-numar-articole="{{ numarArticole }}"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Psihologi
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Pacienți
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-warning"></i> Articole
+                            </span>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if userRole == 'ROL_MEDIC' %}
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Statistici</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Actiuni:</div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin/pacient/new.php">Adăugare pacient</a>
+                                <a class="dropdown-item" href="/admin/test/new.php">Adăugare test</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="myPieChart" data-numar-medici="{{ numarPacientiForMedic }}" data-numar-pacienti="{{ numarTesteForMedic }}" data-numar-articole="{{ numarConvForMedic }}"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Pacienți
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Teste
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-warning"></i> Conversați
+                            </span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="row d-flex flex-column">
+                <div class="col mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                {% if userRole == 'ROL_ADMIN' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Psihologi înregistrați</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarMedici }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-user-md fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                                {% if userRole == 'ROL_MEDIC' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pacienți înregistrați</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarPacientiForMedic}}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                {% if userRole == 'ROL_ADMIN' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pacienți înregistrați</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarPacienti }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                                {% if userRole == 'ROL_MEDIC' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Teste înregistrate</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarTesteForMedic }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-notes-medical fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                {% if userRole == 'ROL_ADMIN' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Articole adăugate</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarArticole }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="far fa-newspaper fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                                {% if userRole == 'ROL_MEDIC' %}
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Conversați începute</div>
+                                    <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarConvForMedic }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comment-dots fa-2x text-gray-300"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if userRole == 'ROL_ADMIN' %}
+    <div class="row d-flex justify-content-around align-items-center my-5">
+        <div class="col-lg-4 col-md-6"></div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Testimoniale adăugate</div>
+                            <div class="h4 mb-0 mr-3 font-weight-bold text-gray-800">{{ numarReviews }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-star-half-alt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/assets/js/Chart.min.js"></script>
+    <script src="/assets/js/chart-pie-demo.js"></script>
+{% endblock %}

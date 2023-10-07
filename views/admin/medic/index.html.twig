@@ -1,0 +1,106 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/assets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Page level plugins -->
+    <script src="/assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/js/datatable-medics.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between align-items-center mb-3 p-2">
+        <h1 class="h1 text-gray-800">Psihologi</h1>
+        <a href="/admin/medic/new.php" class="btn btn-success btn-icon-split rounded-pill">
+            <span class="icon text-white-50 ">
+                <i class="fas fa-plus mt-2"></i>
+            </span>
+            <span class="h5 text mt-1 mx-3">Adaugă</span>
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tabel cu psihologii înregistrați</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Specialitate</th>
+                            <th>Vârsta</th>
+                            <th>Telefon</th>
+                            <th>Adresă</th>
+                            <th>Dată înregistrare</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Specialitate</th>
+                            <th>Vârsta</th>
+                            <th>Telefon</th>
+                            <th>Adresa</th>
+                            <th>Dată înregistrare</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for medic in doctors %}
+                        <tr>
+                            <td>{{ medic.nume }}</td>
+                            <td>{{ medic.specialitate }}</td>
+                            <td>{{ medic.getAge() }}</td>
+                            <td>{{ medic.telefon }}</td>
+                            <td>{{ medic.adresa }}</td>
+                            <td>{{ medic.angajare }}</td>
+                            <td>
+                                <div class="d-flex justify-content-start">
+                                    <a href="/admin/medic/edit.php?id={{ medic.id }}" class="btn btn-info btn-circle btn-sm mr-2">
+                                            <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a href="/admin/medic/delete.php?id={{ medic.id }}" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#deletemodal-{{ medic.id }}">
+                                            <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+
+                                <div class="modal fade" id="deletemodal-{{ medic.id }}" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="modaltitle">Ștergere psiholog</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p>Ești sigur că vrei să ștergi acest psiholog?</p>                                    
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulare</button>
+                                        <a href="/admin/medic/delete.php?id={{ medic.id }}" class="btn btn-danger">Ștergere</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

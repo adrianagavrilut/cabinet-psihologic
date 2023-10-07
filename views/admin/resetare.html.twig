@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="/"><img src="/assets/img/logo.png" width="100" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+            <li class="nav-item px-2"><a class="nav-link fs-1" aria-current="page" href="/#about">Despre noi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#doctors">Psihologi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#reviews">Testimoniale </a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#blog">Articole</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="#footer">Contact</a></li>
+            </ul><a class="btn btn-sm btn-outline-primary rounded-pill order-1 order-lg-0 ms-lg-4 px-5 fs-1" href="/admin/login.php">Sign In</a>
+        </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+    <section class="py-5">
+        <div class="bg-holder bg-size" style="background-image:url(/assets/img/hero-bg.png);background-position:top center;background-size:cover;"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 py-3">
+              <h1 class="text-center mt-6">Welcome back!</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-8">
+        <div class="container">
+          <div class="row">
+            <div class="bg-holder bg-size" style="background-image:url(/assets/img/dot-bg.png);background-position:bottom right;background-size:auto;">
+            </div>
+            <div class="col-lg-6 z-index-2"><img class="w-100" src="/assets/img/sign-in.png" alt="..." /></div>
+            <div class="col-lg-6 z-index-2 d-flex align-items-center justify-content-center">
+              
+                <form class="row g-3 user" action="/admin/resetare.php?hash={{ hash }}" method="POST">
+                    <div class="col-md-12 text-center">
+                        <h1 class="h4 text-gray-900 mb-2">Parolă nouă</h1>
+                        <p class="mb-4 px-5">Ați solicitat schimbarea parolei. Vă rugăm introduceți noua parolă!</p>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" class="form-control form-livedoc-control" name="password" id="password" placeholder="Parola">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="password" class="form-control form-livedoc-control" name="second_password" id="second_password" placeholder="Verificare parola">
+                    </div>
+
+                    <div class="col-12">
+                        <div class="d-grid d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-user rounded-pill px-7">Resetare parolă</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </section>
+{% endblock %}
+

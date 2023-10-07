@@ -1,0 +1,56 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="h1 mb-4 text-gray-800">Test nou</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/admin/test/new.php" method="POST">
+                <div class="form-row mb-3">
+                    <div class="col-12">
+                        <label class="form-label" for="denumire">Denumire</label>
+                        <input type="text" id="denumire" placeholder="Scrieti numele testului" class="form-control  {% if errors['denumire'] is defined %}is-invalid{% endif %}" name="denumire" value="{{ test is defined ? test.denumire : '' }}" />
+                        {% if errors['denumire'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['denumire'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="descriere">Descriere</label>
+
+                            <textarea name="descriere" class="form-control editor">{{ test is defined ? test.descriere : '' }}</textarea>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-start">
+                        <a href="/admin/test/" class="btn btn-secondary px-5 rounded-pill"><h4 class="m-0">Anulare</h4></a>
+                    </div>
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5 rounded-pill"><h4 class="m-0">Salvare</h4></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="/assets/js/initEditor.js"></script>
+{% endblock %}

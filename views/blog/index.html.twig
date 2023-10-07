@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="/"><img src="/assets/img/logo.png" width="100" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+            <li class="nav-item px-2"><a class="nav-link fs-1" aria-current="page" href="/#about">Despre noi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#doctors">Psihologi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#reviews">Testimoniale</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/blog">Articole</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="#footer">Contact</a></li>
+            </ul><a class="btn btn-sm btn-outline-primary rounded-pill order-1 order-lg-0 ms-lg-4 px-5 fs-1" href="/admin/login.php">Sign In</a>
+        </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+    <section class="py-xxl-9" id="home">
+        <div class="bg-holder bg-size" style="background-image:url(/assets/img/header-bg.png);background-position:top center;background-size:cover;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="px-8">Articole publicate</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col">
+                    <form action="/blog/search/index.php" method="GET" class="d-flex">
+                        <input type="text" name="search" class="form-control custom-input rounded-pill me-2" placeholder="Caută articole..." required>
+                        <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill px-5"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                {% for articol in articole %}
+                <div class="col-sm-6 col-lg-3 mb-4">
+                    <div class="card h-100 shadow card-span rounded-3 article-thumb" style="background-image: url('/assets/img/blog/{{ articol.imagine }}');">
+                        <div class="card-body">
+                            <div class="article-teaser p-3">
+                                <span class="fs--1 text-primary me-3">{{ articol.categorie }}</span>
+                                <i class="far fa-calendar"></i>
+                                <span class="fs--1 text-900">{{ articol.publicare }}</span>
+                                <span class="fs--1"></span>
+                                <h5 class="font-base fs-lg-0 fs-xl-1 my-3">{{ articol.titlu }}</h5>
+                                <a class="stretched-link" href="/blog/articol?id_articol={{ articol.id }}">Citește articol</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

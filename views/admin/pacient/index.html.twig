@@ -1,0 +1,124 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/assets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Page level plugins -->
+    <script src="/assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/js/datatable-medics.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between align-items-center mb-3 p-2">
+        <h1 class="h1 text-gray-800">Pacienți</h1>
+        <a href="/admin/pacient/new.php" class="btn btn-success btn-icon-split rounded-pill">
+            <span class="icon text-white-50 ">
+                <i class="fas fa-plus mt-2"></i>
+            </span>
+            <span class="h5 text mt-1 mx-3">Adaugă</span>
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tabel cu pacienții înregistrați</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Vârsta</th>
+                            <th>Gen</th>
+                            <th>Telefon</th>
+                            <th>Adresă</th>
+                            <th>Dată înregistrare</th>
+                            <th style="width:20%">Acțiuni</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Vârsta</th>
+                            <th>Gen</th>
+                            <th>Telefon</th>
+                            <th>Adresă</th>
+                            <th>Dată înregistrare</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for pacient in pacients %}
+                        <tr>
+                            <td>{{ pacient.nume }}</td>
+                            <td>{{ pacient.getAge() }}</td>
+                            <td>{{ pacient.gen }}</td>
+                            <td>{{ pacient.telefon }}</td>
+                            <td>{{ pacient.adresa }}</td>
+                            <td>{{ pacient.inregistrare }}</td>
+                            <td>
+                                <div class="d-flex justify-content-end">
+                                    <a href="/admin/pacient/edit.php?id={{ pacient.id }}" class="btn btn-info btn-circle btn-sm mr-2">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a href="/admin/pacient/delete.php?id={{ pacient.id }}" class="btn btn-danger btn-circle btn-sm mr-2" data-toggle="modal" data-target="#deletemodal-{{ pacient.id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    <a href="/admin/pacient/test?id_pacient={{ pacient.id }}" class="btn btn-primary btn-icon-split btn-sm rounded-pill mr-2 pr-2">
+                                        <span class="icon text-white-50 pt-2">
+                                            <i class="fas fa-file-medical"></i>
+                                        </span>
+                                        <span class="text">Teste</span>
+                                    </a>
+                                    <a href="/admin/pacient/istoric?id_pacient={{ pacient.id }}" class="btn btn-warning btn-icon-split btn-sm rounded-pill mr-2 pr-2">
+                                        <span class="icon text-white-50 pt-2">
+                                            <i class="fas fa-project-diagram"></i>
+                                        </span>
+                                        <span class="text">Istoric</span>
+                                    </a>
+                                    <a href="/admin/pacient/portofoliu?id_pacient={{ pacient.id }}" class="btn btn-secondary btn-icon-split btn-sm rounded-pill mr-2 pr-2">
+                                        <span class="icon text-white-50 pt-2">
+                                            <i class="fas fa-folder-open"></i>
+                                        </span>
+                                        <span class="text">Portofoliu</span>
+                                    </a>
+                                </div>
+
+                                <div class="modal fade" id="deletemodal-{{ pacient.id }}" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="modaltitle">Ștergere pacient</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p>Ești sigur că vrei să ștergi acest pacient?</p>                                    
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulare</button>
+                                        <a href="/admin/pacient/delete.php?id={{ pacient.id }}" class="btn btn-danger">Ștergere</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

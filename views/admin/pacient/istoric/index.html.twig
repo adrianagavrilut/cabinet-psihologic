@@ -1,0 +1,45 @@
+{% extends "admin/base.html.twig" %}
+
+{% block content %}
+
+    <h1 class="h2 text-gray-800 mb-4">Istoricul medical al pacientului <strong>{{ numePacient }}</strong></h1>
+    {% if istoric is empty %}
+        <div class="alert alert-info rounded-pill text-center my-5" role="alert">
+            Pacientul nu a completat încă anamneza.
+        </div>
+    {% else %}
+        <h2 class="h5 text-gray-800 mb-5">Introdus de pacient</h1>
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">Rudă</th>
+                                <th>Anamneză</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in istoric %}
+                                <tr>
+                                    <td>{{ item.ruda | raw }}</td>
+                                    <td>{{ item.continut | default('') | raw }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row mb-4">
+        <div class="col">
+            <a href="/admin/pacient/" class="btn btn-success btn-icon-split rounded-pill">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left mt-1"></i>
+                </span>
+                <span class=" text mx-3">Înapoi la pacienți</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

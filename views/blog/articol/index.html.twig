@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="/"><img src="/assets/img/logo.png" width="100" alt="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+            <li class="nav-item px-2"><a class="nav-link fs-1" aria-current="page" href="/#about">Despre noi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#doctors">Psihologi</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/#reviews">Testimoniale</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="/blog">Articole</a></li>
+            <li class="nav-item px-2"><a class="nav-link fs-1" href="#footer">Contact</a></li>
+            </ul><a class="btn btn-sm btn-outline-primary rounded-pill order-1 order-lg-0 ms-lg-4 px-5 fs-1" href="/admin/login.php">Sign In</a>
+        </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+    <div class="mt-8" style="background-color: #fbf3f0">
+        <div class="article-hero" style="background-image: url('/assets/img/blog/{{ articol.imagine }}');"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="mt-4">{{ articol.titlu }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="mt-4">
+                    <p class="text-muted">Categorie: {{ articol.categorie }}</p>
+                    <p class="text-muted">Data publicării: {{ articol.publicare }}</p>
+                </div>
+                <div class="my-4">
+                    <p>{{ articol.continut | raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+        <div class="row my-4">
+            <div class="col d-flex justify-content-end">
+                <a href="/blog" class="btn btn-sm btn-outline-info rounded-pill px-4">Înapoi la articole</a>
+            </div>
+        </div>
+    </div>    
+
+{% endblock %}

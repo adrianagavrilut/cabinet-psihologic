@@ -1,0 +1,95 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="h1 text-gray-800 mb-3">Portofoliu</h1>
+    <h5 class="text-gray-800 mb-5">Fișierele trimise de dumneavostră și de <strong>{{ pacient.nume }}</strong></h5>
+        <div class="row">
+            <div class="col px-xl-5 text-center">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultrices at tellus at dapibus.
+                    Mauris quis risus suscipit, posuere erat eu, volutpat libero. Cras rhoncus scelerisque ex,
+                    at placerat eros pulvinar eu. Suspendisse potenti. Phasellus consectetur, erat eu mattis molestie,
+                    urna elit tempor risus, non vulputate lectus tellus vestibulum turpis. Pellentesque habitant
+                    morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque pharetra
+                    dapibus lorem.
+                </p>
+            </div>
+        </div>
+    {% if documents is empty %}
+        <div class="alert alert-info rounded-pill text-center my-5" role="alert">
+            Încă nu s-au trimis fișiere.
+        </div>
+    {% else %}
+        <div class="row px-xl-5 mb-5">
+            <div class="col-12">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap justify-content-between" id="portofolio-wrapper">
+                            {% for doc in documents %}
+                            <div class="document-container mb-3">
+                                <a href="/admin/pacient/portofoliu/delete.php?id_pacient={{ pacient.id }}&id={{ doc.id }}" class=" delete-btn btn btn-outline-danger btn-circle btn-sm mr-2" data-toggle="modal" data-target="#deletemodal-{{ doc.id }}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <a href="/assets/img/portofoliu/{{doc.fisier}}" target="_blank" class="file-link btn d-flex justify-content-center align-items-center flex-column m-2">
+                                    <i class="fas fa-file-alt fa-2x text-gray-300 mb-2"></i>
+                                    <span>{{ doc.numeFisier }}</span>
+                                </a>
+                            </div>
+
+                            <div class="modal fade" id="deletemodal-{{ doc.id }}" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modaltitle">Ștergere fișier</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Ești sigur că vrei să ștergi acest fișier?</p>                                    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulare</button>
+                                            <a href="/admin/pacient/portofoliu/delete.php?id_pacient={{ pacient.id }}&id={{ doc.id }}" class="btn btn-danger">Ștergere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row px-xl-5 my-5">
+        <div class="col">
+            <div action="/admin/pacient/portofoliu/send.php?id_pacient={{ pacient.id }}" class="dropzone" id="my-dropzone-docs">
+                <div class="dz-message" data-dz-message><i class="fas fa-upload fa-lg mr-3"></i><span>Încarcă fișierul aici!</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col">
+            <a href="/admin/pacient/" class="btn btn-success btn-icon-split rounded-pill">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left mt-1"></i>
+                </span>
+                <span class=" text mx-3">Înapoi la pacienți</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="/assets/js/portofoliu.js"></script>
+{% endblock %}

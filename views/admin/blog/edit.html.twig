@@ -1,0 +1,94 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="h1 mb-4 text-gray-800">Modifică articol</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/admin/blog/edit.php?id={{id}}" method="POST" enctype="multipart/form-data">
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="nume">Titlu</label>
+                        <input type="text" id="titlu" placeholder="Scrieți titlul articolului" class="form-control  {% if errors['titlu'] is defined %}is-invalid{% endif %}" name="titlu" value="{{ articol is defined ? articol.titlu : '' }}" />
+                        {% if errors['titlu'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['titlu'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="nume">Categorie</label>
+                        <input type="text" id="categorie" placeholder="Scrieți categoria articolului" class="form-control  {% if errors['categorie'] is defined %}is-invalid{% endif %}" name="categorie" value="{{ articol is defined ? articol.categorie : '' }}" />
+                        {% if errors['categorie'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['categorie'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <label class="form-label" for="imagine">Imagine</label>
+                        </div>
+                        <div>
+                            <input type="file" id="imagine" class="{% if errors['imagine'] is defined %}is-invalid{% endif %}" name="imagine" accept="image/*" />
+                            {% if errors['imagine'] is defined %}
+                                <div class="invalid-feedback">
+                                    {{ errors['imagine'] }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% if articol is defined and articol.imagine %}
+                            <div class="admin-img-thumb" style="background-image: url('/assets/img/blog/{{ articol.imagine }}');"></div>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="publicare">Data publicării</label>
+                        <input type="text" id="data" placeholder="Alegeți data publicării articolului" class="form-control  {% if errors['publicare'] is defined %}is-invalid{% endif %}" name="publicare" value="{{ articol is defined ? articol.publicare : '' }}" />
+                        {% if errors['publicare'] is defined %}
+                            <div class="invalid-feedback">
+                                {{ errors['publicare'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="continut">Conținut</label>
+                            <textarea name="continut" class="form-control editor">{{ articol is defined ? articol.continut : '' }}</textarea>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-start">
+                        <a href="/admin/blog" class="btn btn-secondary px-5 rounded-pill"><h4 class="m-0">Anulare</h4></a>
+                    </div>
+                    <div class="d-grid gap-2 col-6 my-5 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary px-5 rounded-pill"><h4 class="m-0">Salvare</h4></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/assets/js/initDatepicker.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="/assets/js/initEditor.js"></script>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+    <div class="container"><a class="navbar-brand" href="/"><img src="/assets/img/logo.png" width="100" alt="logo" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+        <li class="nav-item px-2"><a class="nav-link fs-1" href="/pacient">Testele mele</a></li>
+        <li class="nav-item px-2"><a class="nav-link fs-1" href="/pacient#istoric">Istoric</a></li>
+        <li class="nav-item px-2"><a class="nav-link fs-1" href="/pacient/chat">Chat</a></li>
+        <li class="nav-item px-2"><a class="nav-link fs-1" href="/pacient/portofoliu">Portofoliu</a></li>
+        <li class="nav-item px-2"><a class="nav-link fs-1" href="#footer">Contact</a></li>
+        </ul><a class="btn btn-sm btn-outline-primary rounded-pill order-1 order-lg-0 ms-lg-4 px-5 fs-1" href="/admin/logout.php">Log Out</a>
+    </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+    <section class="py-xxl-8" id="home">
+        <div class="bg-holder bg-size" style="background-image:url(/assets/img/header-bg.png);background-position:top center;background-size:cover;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="ps-9">Portofoliu</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col px-xl-10 mb-3 text-center">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultrices at tellus at dapibus.
+                        Mauris quis risus suscipit, posuere erat eu, volutpat libero. Cras rhoncus scelerisque ex,
+                        at placerat eros pulvinar eu. Suspendisse potenti. Phasellus consectetur, erat eu mattis molestie,
+                        urna elit tempor risus, non vulputate lectus tellus vestibulum turpis. Pellentesque habitant
+                        morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque pharetra
+                        dapibus lorem.
+                    </p>
+                </div>
+            </div>
+            {% if documents is empty %}
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert-secondary" role="alert">Încă nu s-au trimis fișiere!</div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row px-xl-5 mb-5">
+                    <div class="col-12">
+                        <div class="card h-100 shadow card-span rounded-3 py-2">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap justify-content-between" id="portofolio-wrapper">
+                                    {% for doc in documents %} 
+                                        <a href="/assets/img/portofoliu/{{doc.fisier}}" target="_blank" class="doc-link btn d-flex justify-content-center align-items-center flex-column m-2">
+                                            <i class="doc-icon fas fa-file-alt fa-2x text-gray-300 mb-2"></i>
+                                            <span class="doc-name">{{ doc.numeFisier }}</span>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row px-xl-5 my-5">
+                <div class="col">
+                    <div action="/admin/pacient/portofoliu/send.php" class="dropzone" id="my-dropzone-docs">
+                        <div class="dz-message" data-dz-message><i class="fas fa-upload fa-lg"></i><span>Încarcă fișierul aici!</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="/assets/js/portofoliu.js"></script>
+{% endblock %}

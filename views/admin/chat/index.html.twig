@@ -1,0 +1,65 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="h1 text-gray-800 mb-3 p-2">Chat</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Alegeți o conversație</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4 border border-left">
+                            <div id="chat-conversations-content">
+                                {% for conversation in conversations %}
+                                    {% include 'admin/chat/item-conversation.html.twig' with { 'conversation': conversation } %}
+                                {% endfor %}
+                            </div>
+                            <div id="chat-conversation-create-content" class="d-flex justify-content-center p-3">
+                                <button id="chat-conversation-create" class="btn btn-outline-success rounded-pill">Conversatie noua</button>
+                                <div class="spinner-border text-info js-loader d-none" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8" id="chat-content">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-none">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-lg-3">
+                            <div action="/admin/chat/send.php" class="dropzone" id="my-dropzone">
+                                <div class="dz-message" data-dz-message><i class="fas fa-upload fa-lg mr-3"></i><span>Încarcă fișierele aici!</span></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group my-3 mb-0">
+                                <textarea class="form-control" name="chat-input" id="chat-input" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-auto my-3">
+                            <button id="chat-send" class="btn btn-success rounded-pill px-4">Trimite</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="/assets/js/chat.js"></script>
+{% endblock %}

@@ -1,0 +1,300 @@
+/*-------------------------------------------------------------
+# Istoric
+--------------------------------------------------------------*/
+#istoric .form-label {
+  background-color: #ffffffdd;
+}
+
+.line-bp {
+  position: absolute;
+  top: 70%;
+  width: 40px;
+  height: 1px;
+  background-color: #808080;
+  right: -20px;
+  z-index: -1;
+}
+
+.line-bpt {
+  position: absolute;
+  width: 1px;
+  height: 75px;
+  background-color: #808080;
+  bottom: -49px;
+  right: 0px;
+  z-index: -1;
+}
+
+.line-p {
+  position: absolute;
+  top: 70%;
+  width: 100px;
+  height: 1px;
+  background-color: #808080;
+  right: -80px;
+  z-index: -1;
+}
+
+.line-c {
+  position: absolute;
+  width: 1px;
+  height: 64px;
+  background-color: #808080;
+  bottom: -38px;
+  right: -35px;
+  z-index: -1;
+}
+
+.line-bm {
+  position: absolute;
+  top: 70%;
+  width: 40px;
+  height: 1px;
+  background-color: #808080;
+  right: -20px;
+  z-index: -1;
+}
+
+.line-bmc {
+  position: absolute;
+  width: 1px;
+  height: 75px;
+  background-color: #808080;
+  bottom: -49px;
+  right: 0px;
+  z-index: -1;
+}
+
+/* Hide lines on small screens */
+@media (max-width: 767px) {
+  .line-bp,
+  .line-bpt,
+  .line-p,
+  .line-c,
+  .line-bm,
+  .line-bmc {
+    display: none;
+  }
+}
+
+/*-------------------------------------------------------------
+# Review
+--------------------------------------------------------------*/
+
+.carousel-item .image-container {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.carousel-item .image-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/*-------------------------------------------------------------
+# Articol
+--------------------------------------------------------------*/
+
+.article-hero {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 600px;
+}
+.article-thumb {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+}
+.article-thumb .card-body {
+  height: 400px;
+}
+.article-teaser {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: #ffffffcc;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+/*-------------------------------------------------------------
+# Chat
+--------------------------------------------------------------*/
+.dropzone {
+  border-style: dashed !important;
+  min-height: 100px !important;
+  background: #fcfbfc !important;
+  padding: 10px 10px !important;
+}
+
+/*-------------------------------------------------------------
+# Portofolio
+--------------------------------------------------------------*/
+.doc-link {
+  /* Customize the appearance of the file link container */
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Add a hover effect for the file link container */
+.doc-link:hover {
+  /* background-color: #f6f6f6; */
+  transform: scale(1.02);
+  border-color: #dcdcdc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doc-icon {
+  /* Adjust the size and color of the file icon */
+  font-size: 70px;
+  color: #ded7cc;
+}
+
+.doc-name {
+  /* Customize the font size and color of the file name */
+  font-size: 17px;
+  color: #145e80 !important;
+}
+/*--------------------------------------------------------------
+  # Footer
+  --------------------------------------------------------------*/
+.footer {
+  background: #f6f9ff;
+  padding: 0 0 30px 0;
+  font-size: 14px;
+}
+
+.footer .footer-top {
+  background: white url(/assets/img/footer-bg.png) no-repeat right top;
+  background-size: contain;
+  border-top: 1px solid #e1ecff;
+  border-bottom: 1px solid #e1ecff;
+  padding: 60px 0 30px 0;
+}
+
+@media (max-width: 992px) {
+  .footer .footer-top {
+    background-position: center bottom;
+  }
+}
+
+.footer .footer-top .footer-info {
+  margin-bottom: 30px;
+}
+
+.footer .footer-top .footer-info .logo {
+  line-height: 0;
+  margin-bottom: 15px;
+}
+
+.footer .footer-top .footer-info .logo img {
+  max-height: 40px;
+  margin-right: 6px;
+}
+
+.footer .footer-top .footer-info .logo span {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #012970;
+  font-family: "Nunito", sans-serif;
+  margin-top: 3px;
+}
+
+.footer .footer-top .footer-info p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+.footer .footer-top .social-links a {
+  font-size: 20px;
+  display: inline-block;
+  color: rgba(1, 41, 112, 0.5);
+  line-height: 0;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.footer .footer-top .social-links a:hover {
+  color: #012970;
+}
+
+.footer .footer-top h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #012970;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+
+.footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .footer-top .footer-links ul i {
+  padding-right: 2px;
+  color: #d0d4fc;
+  font-size: 12px;
+  line-height: 0;
+}
+
+.footer .footer-top .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+.footer .footer-top .footer-links ul a {
+  color: #013289;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+.footer .footer-top .footer-links ul a:hover {
+  color: #4154f1;
+}
+
+.footer .footer-top .footer-contact p {
+  line-height: 26px;
+}
+
+.footer .copyright {
+  text-align: center;
+  padding-top: 30px;
+  color: #012970;
+}
+
+.footer .credits {
+  padding-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #012970;
+}

@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center align-items-center">
+    <div class="form-group mr-3 mb-0">
+        <select name="chat-pacient" class="form-control" id="chat-pacient">
+            {% for pacient in pacients %}
+                <option value="{{ pacient.id }}">{{ pacient.nume }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button id="chat-conversation-save" class="btn btn-success">Creeaza</button>
+    <div class="spinner-border text-info js-loader d-none" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
